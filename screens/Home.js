@@ -147,16 +147,7 @@ const TabItem = ({ label, icon, type = 'feather', active = false }) => {
         </ScrollView>
 
       </ScrollView>
-
-      {/* THANH ĐIỀU HƯỚNG (BOTTOM TAB BAR) */}
-      <View style={styles.bottomTabContainer}>
-        <TabItem label="Shop" icon="storefront-outline" type="mci" active={true} />
-        <TabItem label="Explore" icon="search" type="ionicons" />
-        <TabItem label="Cart" icon="shopping-cart" type="feather" />
-        <TabItem label="Favourite" icon="heart" type="feather" />
-        <TabItem label="Account" icon="user" type="feather" />
-      </View>
-
+      
     </SafeAreaView>
   );
 }

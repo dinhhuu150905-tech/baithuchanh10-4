@@ -63,7 +63,7 @@ const categories = [
 
 export default function Explore({ navigation }) {
   
-  // Component phụ cho Tab Item bên dưới
+  // Component phụ cho Tab Item bên dưới (Giữ nguyên cấu trúc của bạn)
   const TabItem = ({ label, icon, type = 'feather', active = false }) => {
     const Color = active ? "#53B175" : "#181725";
     return (
@@ -103,12 +103,21 @@ export default function Explore({ navigation }) {
         <Text style={styles.headerTitle}>Find Products</Text>
       </View>
 
+      {/* SỬA TRỰC TIẾP TẠI ĐÂY: Sử dụng thanh search cũ và thêm logic điều hướng */}
       <View style={styles.searchContainer}>
         <Ionicons name="search" size={22} color="#181725" style={styles.searchIcon} />
         <TextInput 
           placeholder="Search Store" 
           style={styles.searchInput}
           placeholderTextColor="#7C7C7C"
+          returnKeyType="search"
+          onSubmitEditing={(event) => {
+            const text = event.nativeEvent.text;
+            if (text.trim().length > 0) {
+              // Chuyển sang trang Search và truyền từ khóa đi
+              navigation.navigate("Search", { query: text });
+            }
+          }}
         />
       </View>
 
@@ -122,14 +131,6 @@ export default function Explore({ navigation }) {
         columnWrapperStyle={styles.columnWrapper} 
       />
 
-      {/* Thêm Bottom Tab giống trang Home */}
-      <View style={styles.bottomTabContainer}>
-        <TabItem label="Shop" icon="storefront-outline" type="mci" />
-        <TabItem label="Explore" icon="search" type="ionicons" active={true} />
-        <TabItem label="Cart" icon="shopping-cart" type="feather" />
-        <TabItem label="Favourite" icon="heart" type="feather" />
-        <TabItem label="Account" icon="user" type="feather" />
-      </View>
     </SafeAreaView>
   );
 }
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingHorizontal: 20,
-    paddingBottom: 110, // Tăng padding để không bị Tab che mất item cuối
+    paddingBottom: 110, 
   },
   columnWrapper: {
     justifyContent: 'space-between',
@@ -196,26 +197,6 @@ const styles = StyleSheet.create({
     color: '#181725',
     textAlign: 'center',
     lineHeight: 22,
-  },
-  /* Styles cho Bottom Tab */
-  bottomTabContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 90,
-    backgroundColor: '#FFFFFF',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingTop: 12,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    // Đổ bóng cho tab
-    elevation: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -3 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
   },
   tabItem: {
     alignItems: 'center',
