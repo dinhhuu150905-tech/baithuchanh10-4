@@ -11,7 +11,7 @@ import {
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 
 // Dữ liệu mẫu ban đầu (Bạn có thể thay đổi đường dẫn ảnh cho phù hợp với assets của bạn)
-const initialCart = [
+const initialCart =  [
   { 
     id: '1', 
     name: 'Bell Pepper Red', 
@@ -46,7 +46,7 @@ const initialCart = [
   },
 ];
 
-const Cart = () => {
+const Cart = ({ navigation }) => {
   const [cartItems, setCartItems] = useState(initialCart);
 
   // Hàm tăng số lượng
@@ -134,13 +134,28 @@ const Cart = () => {
 
       {/* Nút thanh toán */}
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.checkoutBtn}>
+        <TouchableOpacity 
+          style={styles.checkoutBtn}
+          onPress={() => {
+            if (cartItems.length === 0) {
+              // BƯỚC 1: Chuyển tab chạy sang Favourite để làm nền ẩn phía sau
+              navigation.navigate("Favourite");
+              
+              // BƯỚC 2: Gọi Modal Order Failed hiện đè lên trên nền đó
+              navigation.navigate("OrderFailed");
+            } else {
+              navigation.navigate("Checkout" , { totalPrice: getTotalPrice() });
+            }
+          }}
+        >
           <Text style={styles.checkoutText}>Go to Checkout</Text>
           <View style={styles.totalBadge}>
             <Text style={styles.totalBadgeText}>${getTotalPrice()}</Text>
           </View>
         </TouchableOpacity>
       </View>
+
+      
     </SafeAreaView>
   );
 };

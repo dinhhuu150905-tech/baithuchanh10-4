@@ -22,6 +22,11 @@ import ProductDetail from "./screens/ProductDetail";
 import Cart from "./screens/Cart";
 import Favourite from "./screens/Favourite";
 
+import Account from "./screens/Account"; 
+import CheckoutModal from "./screens/CheckoutModal";
+import OrderAccepted from "./screens/OrderAccepted";
+import OrderFailed from "./screens/OrderFailed";
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -58,7 +63,7 @@ function MainTabs() {
       />
 
       <Tab.Screen name="Favourite" component={Favourite} />
-      <Tab.Screen name="Account" component={Home} /> 
+      <Tab.Screen name="Account" component={Account} /> 
     </Tab.Navigator>
   );
 }
@@ -68,7 +73,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator 
         initialRouteName="Splash" 
-        screenOptions={{ headerShown: false }}
+        screenOptions={{ headerShown: false , presentation: 'card'}}
       >
         {/* Luồng khởi đầu & Auth */}
         <Stack.Screen name="Splash" component={SplashScreen} />
@@ -87,6 +92,21 @@ export default function App() {
         <Stack.Screen name="Filters" component={Filters} />
         <Stack.Screen name="Beverages" component={Beverages} />
         <Stack.Screen name="ProductDetail" component={ProductDetail} />
+
+        {/* Định nghĩa Checkout và OrderFailed dạng Modal hiện từ dưới lên */}
+        <Stack.Group screenOptions={{ presentation: 'transparentModal', animation: 'slide_from_bottom' }}>
+          <Stack.Screen name="Checkout" component={CheckoutModal} />
+          <Stack.Screen name="OrderFailed" component={OrderFailed} />
+        </Stack.Group>
+
+        <Stack.Screen 
+          name="OrderAccepted" 
+          component={OrderAccepted} 
+          options={{ 
+            presentation: 'fullScreenModal', 
+            animation: 'fade' 
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

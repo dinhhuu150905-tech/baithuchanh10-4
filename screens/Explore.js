@@ -122,6 +122,7 @@ export default function Explore({ navigation }) {
       </View>
 
       <FlatList
+        key={2}
         data={categories}
         renderItem={renderItem}
         keyExtractor={item => item.id}
@@ -175,21 +176,21 @@ const styles = StyleSheet.create({
   },
   columnWrapper: {
     justifyContent: 'space-between',
-    marginBottom: 15,
+    marginBottom: 15, // Khoảng cách giữa các hàng
   },
   catCard: {
     width: cardWidth,
-    height: 189,
+    height: 189, 
     borderRadius: 18,
     borderWidth: 1,
     padding: 15,
-    alignItems: 'center',
+    alignItems: 'center', 
     justifyContent: 'center',
+    marginVertical: 8, // Thêm một chút margin dọc để các hàng không dính sát nhau quá
   },
   catImage: {
-    width: '100%',
-    height: 90,
-    marginBottom: 15,
+    width: '80%', // Dùng % để tự co giãn theo cardWidth
+    height: 80,
   },
   catName: {
     fontSize: 16,
@@ -197,6 +198,7 @@ const styles = StyleSheet.create({
     color: '#181725',
     textAlign: 'center',
     lineHeight: 22,
+    marginTop: 10, // Thay vì dùng marginBottom ở ảnh, dùng marginTop ở chữ sẽ chuẩn hơn
   },
   tabItem: {
     alignItems: 'center',
